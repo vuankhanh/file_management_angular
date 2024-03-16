@@ -1,0 +1,37 @@
+<app-bread-crumbs [breadcrumbs]="pathStack" (emitIndexStack)="listenIndexStackChange($event)"></app-bread-crumbs>
+<div class="container"
+  [cdkContextMenuTriggerFor]="contextMenu"
+>
+  <file-directories-list
+    [files]="files"
+    (contextmenu)="$event.stopPropagation()"
+    (itemClick)="onItemClicked($event)"
+    (removeItem)="removeItem($event)"
+    (renameItem)="renameItem($event)"
+  ></file-directories-list>
+</div>
+
+<ng-template #contextMenu>
+  <div class="menu" cdkMenu>
+    <button mat-button class="menu-item" (click)="createFolder()" cdkMenuItem>
+      <mat-icon>add_box</mat-icon>
+      Tạo thư mục mới
+    </button>
+    <button mat-button class="menu-item" (click)="fileInput.click()" cdkMenuItem>
+      <mat-icon>cloud_upload</mat-icon>
+      Tải lên
+    </button>
+    <button mat-button class="menu-item" (click)="reload()" cdkMenuItem>
+      <mat-icon>refresh</mat-icon>
+      Tải lại
+    </button>
+  </div>
+</ng-template>
+
+<input
+  type="file"
+  #fileInput
+  style="display: none"
+  multiple
+  (change)="onFileSelected($event)"
+/>

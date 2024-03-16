@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Đổi tên</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput [formControl]="nameControl">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+  <button mat-button [mat-dialog-close]>Hủy</button>
+  <button mat-button
+    [mat-dialog-close]="nameControl.value"
+    [disabled]="nameControl.invalid"
+    cdkFocusInitial
+  >Ok</button>
+</mat-dialog-actions>

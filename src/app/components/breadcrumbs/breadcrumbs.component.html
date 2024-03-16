@@ -1,0 +1,11 @@
+@if (breadcrumbs$ | async; as breadcrumbs) {
+  <div class="breadcrumb-container horizontal-container">
+    <ul>
+      @for (breadcrumb of breadcrumbs; track $index) {
+        <li (click)="onClickCrumb($index)">
+          <a>{{ $index === 0 ? 'home' : breadcrumb }}</a>
+        </li>
+      }
+    </ul>
+  </div>
+}

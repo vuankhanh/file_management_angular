@@ -1,0 +1,30 @@
+<mat-list>
+  @for (file of files; track $index) {
+    <mat-list-item
+      (click)="onClickItem($index)"
+      (dblclick)="onDoulbeClickItem(file)"
+      [cdkContextMenuTriggerFor]="contextMenu"
+      [cdkContextMenuTriggerData]="{ $implicit: { file, index: $index } }"
+      [ngStyle]="{'background-color': selectionItem === $index ? '#c2e7ff' : ''}"
+    >
+      <mat-icon matListItemIcon>
+        {{ file.type === 'd' ? 'folder' : 'note' }}
+      </mat-icon>
+      <div matListItemTitle>{{file.name}}</div>
+      <div matListItemLine>{{file.modifyTime | date: 'HH:mm:ss dd/MM/yyyy'}}</div>
+    </mat-list-item>
+  }
+</mat-list>
+
+<ng-template #contextMenu let-item>
+  <div class="menu" cdkMenu>
+    <button mat-button class="menu-item" (click)="remove(item)" cdkMenuItem>
+      <mat-icon>delete</mat-icon>
+      Xóa
+    </button>
+    <button mat-button class="menu-item" (click)="rename(item)" cdkMenuItem>
+      <mat-icon>edit</mat-icon>
+      Đổi tên
+    </button>
+  </div>
+</ng-template>
